@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { AppComponent } from "./app.component";
 import { BrowserModule } from "@angular/platform-browser";
- 
-
+import { provideFirebaseApp, getApp, initializeApp} from '@angular/fire/app';
+import {getFirestore, provideFirestore} from '@angular/fire/firestore';
 
 import { CommonModule } from "@angular/common";
 import { RouterOutlet } from "@angular/router";
@@ -21,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { CurrentTrainingComponent } from "./training/current-training/current-training.component";
+import { environment } from "../environments/environment";
 
 
 @NgModule({
@@ -44,7 +45,9 @@ import { CurrentTrainingComponent } from "./training/current-training/current-tr
         AppRoutingModule,
         FlexLayoutModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideFirestore (() => getFirestore())
     ],
     providers: [],
     bootstrap: [AppComponent]
